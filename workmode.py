@@ -7,7 +7,9 @@ import re
 
 url = ["127.0.0.1 www.facebook.com",
        "127.0.0.1 www.yahoo.com.tw",
-       "127.0.0.1 www.yahoo.com"]
+       "127.0.0.1 www.yahoo.com",
+       "106.185.47.91 docs.lyrasoft.net"
+       "127.0.0.1 ptt.cc"]
 
 
 
@@ -47,7 +49,7 @@ class WorkMode(object):
             ans = raw_input('Would you like to turn off the WorkMode? (y/n)')
             if (ans == "y"):
                 self.delete()
-                print "WorkMode : OFF"
+                print bcolors.OKGREEN + "WorkMode : OFF" + bcolors.ENDC
             elif (ans == "n"):
                 return 0
             else:
@@ -57,7 +59,7 @@ class WorkMode(object):
             ans = raw_input('Would you like to turn on the WorkMode? (y/n)')
             if (ans == "y"):
                 self.create()
-                print "WorkMode : ON"
+                print  bcolors.OKGREEN + "WorkMode : ON"+ bcolors.ENDC
             elif (ans == "n"):
                 return 0
             else:
@@ -73,6 +75,7 @@ class WorkMode(object):
         file_text.write("\n"+"127.0.0.1 www.facebook.com")
         file_text.write("\n"+"127.0.0.1 www.yahoo.com")
         file_text.write("\n"+"127.0.0.1 tw.yahoo.com")
+        file_text.write("\n"+"106.185.47.91 docs.lyrasoft.net")
         file_text.close()
 
     def delete(self):
@@ -86,7 +89,7 @@ class WorkMode(object):
         #Write temp into file if not contians forbidan urls
         f = open(self.path, 'w')
         for line in lines:
-            if (line != "127.0.0.1 www.facebook.com" + "\n" and line != "127.0.0.1 www.yahoo.com" + "\n" and line != "127.0.0.1 tw.yahoo.com"):
+            if (line != "127.0.0.1 www.facebook.com" + "\n" and line != "127.0.0.1 www.yahoo.com" + "\n" and line != "127.0.0.1 tw.yahoo.com" + "\n" and line != "106.185.47.91 docs.lyrasoft.net"):
                 f.write(line)
         f.close()
 
@@ -105,5 +108,5 @@ class bcolors:
 mode =  WorkMode()
 mode.loadfile()
 mode.find_status()
-print bcolors.OKGREEN+ "Current WorkMode Status:  " + mode.status + bcolors.ENDC
+print bcolors.HEADER+ "Current WorkMode Status:  " + mode.status + bcolors.ENDC
 mode.go()
